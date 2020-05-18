@@ -1,0 +1,131 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">-->
+<!--<mapper namespace="com.mapper.UserDao">-->
+<!--  <resultMap id="BaseResultMap" type="com.entity.User">-->
+<!--    &lt;!&ndash;@mbg.generated&ndash;&gt;-->
+<!--    &lt;!&ndash;@Table user&ndash;&gt;-->
+<!--    <id column="id" jdbcType="BIGINT" property="id" />-->
+<!--    <result column="username" jdbcType="VARCHAR" property="username" />-->
+<!--    <result column="password" jdbcType="VARCHAR" property="password" />-->
+<!--    <result column="nickName" jdbcType="VARCHAR" property="nickname" />-->
+<!--    <result column="phone" jdbcType="VARCHAR" property="phone" />-->
+<!--    <result column="email" jdbcType="VARCHAR" property="email" />-->
+<!--    <result column="loginTime" jdbcType="TIMESTAMP" property="logintime" />-->
+<!--    <result column="failCount" jdbcType="TINYINT" property="failcount" />-->
+<!--  </resultMap>-->
+<!--  <sql id="Base_Column_List">-->
+<!--    &lt;!&ndash;@mbg.generated&ndash;&gt;-->
+<!--    id, username, `password`, nickName, phone, email, loginTime, failCount-->
+<!--  </sql>-->
+<!--  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">-->
+<!--    &lt;!&ndash;@mbg.generated&ndash;&gt;-->
+<!--    select -->
+<!--    <include refid="Base_Column_List" />-->
+<!--    from user-->
+<!--    where id = #{id,jdbcType=BIGINT}-->
+<!--  </select>-->
+<!--  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">-->
+<!--    &lt;!&ndash;@mbg.generated&ndash;&gt;-->
+<!--    delete from user-->
+<!--    where id = #{id,jdbcType=BIGINT}-->
+<!--  </delete>-->
+<!--  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.entity.User" useGeneratedKeys="true">-->
+<!--    &lt;!&ndash;@mbg.generated&ndash;&gt;-->
+<!--    insert into user (username, `password`, nickName, -->
+<!--      phone, email, loginTime, -->
+<!--      failCount)-->
+<!--    values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, -->
+<!--      #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{logintime,jdbcType=TIMESTAMP}, -->
+<!--      #{failcount,jdbcType=TINYINT})-->
+<!--  </insert>-->
+<!--  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.entity.User" useGeneratedKeys="true">-->
+<!--    &lt;!&ndash;@mbg.generated&ndash;&gt;-->
+<!--    insert into user-->
+<!--    <trim prefix="(" suffix=")" suffixOverrides=",">-->
+<!--      <if test="username != null">-->
+<!--        username,-->
+<!--      </if>-->
+<!--      <if test="password != null">-->
+<!--        `password`,-->
+<!--      </if>-->
+<!--      <if test="nickname != null">-->
+<!--        nickName,-->
+<!--      </if>-->
+<!--      <if test="phone != null">-->
+<!--        phone,-->
+<!--      </if>-->
+<!--      <if test="email != null">-->
+<!--        email,-->
+<!--      </if>-->
+<!--      <if test="logintime != null">-->
+<!--        loginTime,-->
+<!--      </if>-->
+<!--      <if test="failcount != null">-->
+<!--        failCount,-->
+<!--      </if>-->
+<!--    </trim>-->
+<!--    <trim prefix="values (" suffix=")" suffixOverrides=",">-->
+<!--      <if test="username != null">-->
+<!--        #{username,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="password != null">-->
+<!--        #{password,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="nickname != null">-->
+<!--        #{nickname,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="phone != null">-->
+<!--        #{phone,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="email != null">-->
+<!--        #{email,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="logintime != null">-->
+<!--        #{logintime,jdbcType=TIMESTAMP},-->
+<!--      </if>-->
+<!--      <if test="failcount != null">-->
+<!--        #{failcount,jdbcType=TINYINT},-->
+<!--      </if>-->
+<!--    </trim>-->
+<!--  </insert>-->
+<!--  <update id="updateByPrimaryKeySelective" parameterType="com.entity.User">-->
+<!--    &lt;!&ndash;@mbg.generated&ndash;&gt;-->
+<!--    update user-->
+<!--    <set>-->
+<!--      <if test="username != null">-->
+<!--        username = #{username,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="password != null">-->
+<!--        `password` = #{password,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="nickname != null">-->
+<!--        nickName = #{nickname,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="phone != null">-->
+<!--        phone = #{phone,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="email != null">-->
+<!--        email = #{email,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="logintime != null">-->
+<!--        loginTime = #{logintime,jdbcType=TIMESTAMP},-->
+<!--      </if>-->
+<!--      <if test="failcount != null">-->
+<!--        failCount = #{failcount,jdbcType=TINYINT},-->
+<!--      </if>-->
+<!--    </set>-->
+<!--    where id = #{id,jdbcType=BIGINT}-->
+<!--  </update>-->
+<!--  <update id="updateByPrimaryKey" parameterType="com.entity.User">-->
+<!--    &lt;!&ndash;@mbg.generated&ndash;&gt;-->
+<!--    update user-->
+<!--    set username = #{username,jdbcType=VARCHAR},-->
+<!--      `password` = #{password,jdbcType=VARCHAR},-->
+<!--      nickName = #{nickname,jdbcType=VARCHAR},-->
+<!--      phone = #{phone,jdbcType=VARCHAR},-->
+<!--      email = #{email,jdbcType=VARCHAR},-->
+<!--      loginTime = #{logintime,jdbcType=TIMESTAMP},-->
+<!--      failCount = #{failcount,jdbcType=TINYINT}-->
+<!--    where id = #{id,jdbcType=BIGINT}-->
+<!--  </update>-->
+<!--</mapper>-->

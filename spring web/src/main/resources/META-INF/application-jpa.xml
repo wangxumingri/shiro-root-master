@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="
+      http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+      http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+      http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+      http://www.springframework.org/schema/data/jpa
+      http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+
+
+    <context:property-placeholder location="classpath:META-INF/jdbc.properties"/>
+
+    <!--注解扫描-->
+    <context:component-scan base-package="com.wxss" >
+        <context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.RestController"/>
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!--数据库连接池-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${driverClassName}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="wxss"/>
+        <property name="password" value="${password}"/>
+    </bean>
+    <!--将实体类管理器工厂类交给spring管理-->
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <!--注入数据源-->
+        <property name="dataSource" ref="dataSource"/>
+        <!--扫描实体类所在包：扫描该包下的实体类，找到使用JPA注解的实体类；
+            程序启动后，分析映射关系-->
+        <property name="packagesToScan" value="com.wxss.entity"/>
+        <!--JPA实现方：Hibernate-->
+        <property name="persistenceProvider">
+            <bean class="org.hibernate.jpa.HibernatePersistenceProvider"/>
+        </property>
+        <!--JPA的供应商适配器-->
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <!--应用是否创建表-->
+                <property name="generateDdl" value="false"/>
+                <!--使用的数据库类型-->
+                <property name="database" value="MYSQL"/>
+                <!--数据库环境-->
+                <property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect"/>
+                <!--控制台是否显示sql语句-->
+                <property name="showSql" value="true"/>
+            </bean>
+        </property>
+        <!--JPA方言：hibernate的一些特性-->
+        <property name="jpaDialect">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaDialect"/>
+        </property>
+    </bean>
+    <!-- 3.事务管理器-->
+    <!-- JPA事务管理器  -->
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+
+    <!-- 整合spring data jpa
+        base-package : dao接口所在包，spring 会对该包下接口进行动态代理
+        transaction-manager-ref: 引用的事务管理器
+        entity-manager-factory-ref : 引用的实体类工厂
+    -->
+    <jpa:repositories
+            base-package="com.wxss.dao"
+            transaction-manager-ref="transactionManager"
+            entity-manager-factory-ref="entityManagerFactory" />
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+</beans>
