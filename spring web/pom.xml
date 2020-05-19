@@ -112,13 +112,12 @@
             <version>1.1.20</version>
         </dependency>
 
-        <!-- shiro 包-->
+        <!-- shiro 包 start-->
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-core</artifactId>
             <version>1.2.2</version>
         </dependency>
-
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-web</artifactId>
@@ -142,23 +141,21 @@
             <artifactId>shiro-spring</artifactId>
             <version>1.2.2</version>
         </dependency>
+        <!-- shiro 包 end-->
 
-        <dependency>
-            <groupId>net.sf.ehcache</groupId>
-            <artifactId>ehcache-core</artifactId>
-            <optional>false</optional>
-        </dependency>
-
-<!--        <dependency>-->
-<!--            <groupId>org.slf4j</groupId>-->
-<!--            <artifactId>jcl-over-slf4j</artifactId>-->
-<!--            <version>${slf4j.version}</version>-->
-<!--        </dependency>-->
+         <!--日志 start-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.slf4j</groupId>-->
+        <!--            <artifactId>jcl-over-slf4j</artifactId>-->
+        <!--            <version>${slf4j.version}</version>-->
+        <!--        </dependency>-->
+        <!--log4j日志框架-->
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>${log4j.version}</version>
         </dependency>
+        <!--slf4j日志门面-->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -169,12 +166,12 @@
             <artifactId>slf4j-log4j12</artifactId>
             <version>${slf4j.version}</version>
         </dependency>
-
-<!--        <dependency>-->
-<!--            <groupId>org.projectlombok</groupId>-->
-<!--            <artifactId>lombok</artifactId>-->
-<!--            <version>1.18.12</version>-->
-<!--        </dependency>-->
+        <!--日志 end-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.projectlombok</groupId>-->
+        <!--            <artifactId>lombok</artifactId>-->
+        <!--            <version>1.18.12</version>-->
+        <!--        </dependency>-->
 
         <!-- el beg  -->
 <!--        <dependency>-->
@@ -187,16 +184,33 @@
 <!--            <artifactId>javax.el</artifactId>-->
 <!--            <version>2.2.4</version>-->
 <!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>javax.servlet.jsp.jstl</groupId>-->
-<!--            <artifactId>jstl</artifactId>-->
-<!--            <version>1.2</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>javax.servlet</groupId>-->
-<!--            <artifactId>servlet-api</artifactId>-->
-<!--            <version>2.5</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>javax.servlet.jsp.jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet.jsp.jstl</groupId>
+            <artifactId>jstl-api</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>jstl-impl</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>taglibs</groupId>
+            <artifactId>standard</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
 
         <!-- el end -->
 
@@ -219,17 +233,17 @@
                 </configuration>
             </plugin>
             <!-- tomcat插件 -->
-            <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.2</version>
-                <configuration>
-                    <port>8899</port>
-                    <path>/</path>
-                    <uriEncoding>UTF-8</uriEncoding>
-                    <server>tomcat7</server>
-                </configuration>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.apache.tomcat.maven</groupId>-->
+<!--                <artifactId>tomcat7-maven-plugin</artifactId>-->
+<!--                <version>2.2</version>-->
+<!--                <configuration>-->
+<!--                    <port>8899</port>-->
+<!--                    <path>/</path>-->
+<!--                    <uriEncoding>UTF-8</uriEncoding>-->
+<!--                    <server>tomcat7</server>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
         </plugins>
     </build>
 
