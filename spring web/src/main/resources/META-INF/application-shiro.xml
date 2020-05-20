@@ -47,12 +47,6 @@
     -->
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
 
-    <!--5.启用IOC容器中使用Shiro的注解，但必须在配置了lifecycleBeanPostProcessor后使用-->
-    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>
-    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
-        <property name="securityManager" ref="securityManager"/>
-    </bean>
-
 <!--    必须和web.xml中配置的filter名称一致-->
     <bean id="shiroFilter"  class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <!--配置安全管理器-->

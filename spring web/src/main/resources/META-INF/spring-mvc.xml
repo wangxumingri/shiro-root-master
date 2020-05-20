@@ -16,7 +16,16 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <mvc:annotation-driven></mvc:annotation-driven>
+    <!--启用IOC容器中使用Shiro的注解，但必须在配置了lifecycleBeanPostProcessor后使用
+        spring 和 spring mvc 配置分开时，必须配置在spring mvc 的配置文件中
+    -->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+
+    <mvc:annotation-driven />
+    <!--spring mvc 处理静态资源，url不用再使用后缀 .do过滤静态资源-->
     <mvc:default-servlet-handler/>
 
 

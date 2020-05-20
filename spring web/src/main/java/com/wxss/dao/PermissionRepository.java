@@ -14,15 +14,7 @@ import java.util.List;
  * @since: 1.0.0
  */
 public interface PermissionRepository extends JpaRepository<Permission,Long>{
-    @Query(nativeQuery = true,value = "select p.id, p.name from user u " +
-            "left join user_role ru " +
-            "on u.id = ru.uid left " +
-            "join role r " +
-            "on r.id = ru.rid " +
-            "left join role_permission rp " +
-            "on r.id = rp.rid " +
-            "left join permission p " +
-            "on p.id = rp.pid " +
+    @Query(nativeQuery = true,value = "SELECT p.id,p.name  from user u INNER JOIN user_role  ur on u.id = ur.uid  INNER JOIN role_permission  rp on  ur.rid = rp.rid INNER JOIN permission p on rp.pid = p.id \n" +
             "where u.name = ?1")
     List<Permission> listPermissionsByUserName(String userName);
 }
