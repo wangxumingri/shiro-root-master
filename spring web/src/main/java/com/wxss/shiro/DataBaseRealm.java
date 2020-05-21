@@ -6,8 +6,10 @@ import com.wxss.service.UserService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Set;
@@ -57,22 +59,35 @@ public class DataBaseRealm  extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-        //获取账号密码
-        UsernamePasswordToken t = (UsernamePasswordToken) token;
+        //获取登录的账号密码
+        UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) token;
         String userName= token.getPrincipal().toString();
-        String password= new String( t.getPassword());
+        String password= new String( usernamePasswordToken.getPassword()); // 前端输入的
+
         //获取数据库中的密码
-        String passwordInDB = userService.getPassword(userName);
+        String credentials = userService.getPassword(userName);
 
 
         //如果为空就是账号不存在，如果不相同就是密码错误，但是都抛出AuthenticationException，而不是抛出具体错误原因，免得给破解者提供帮助信息
-        if(null==passwordInDB || !passwordInDB.equals(password)){
+        if(null==credentials){
             throw new AuthenticationException();
         }
-
+        // 使用用户名做盐(不可靠)
+        ByteSource credentialsSalt = ByteSource.Util.bytes(userName);
         //认证信息里存放账号密码, getName() 是当前Realm的继承方法,通常返回当前类名 :databaseRealm
-        SimpleAuthenticationInfo a = new SimpleAuthenticationInfo(userName,password,getName());
-        return a;
+        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(userName,credentials,credentialsSalt,getName());
+
+        return authenticationInfo;
+    }
+
+    public static void main(String[] args) {
+        String hashAlgorithmName = "MD5";
+        Object credentials = "abcde";
+        // li4 : 1d8b080b1317b7c70195a36943b903b7
+        Object salt = "li4";
+        int hashIterations = 5;
+        Object result = new SimpleHash(hashAlgorithmName, credentials, salt, hashIterations);
+        System.out.println(result);
     }
 
 }
